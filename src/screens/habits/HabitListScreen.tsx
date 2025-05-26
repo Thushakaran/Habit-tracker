@@ -1,21 +1,26 @@
 // src/screens/habits/HabitListScreen.tsx
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Container } from '../../components/common/Container';
-import { Header } from '../../components/common/Header';
-import { HabitList } from '../../components/habits/HabitList';
-import { useAuth } from '../../context/AuthContext';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
-import { MainTabParamList } from '../../types';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {Container} from '../../components/common/Container';
+import {Header} from '../../components/common/Header';
+import {HabitList} from '../../components/habits/HabitList';
+import {useAuth} from '../../context/AuthContext';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {MainTabParamList} from '../../types';
 
-type HabitListScreenNavigationProp = BottomTabNavigationProp<MainTabParamList, 'Habits'>;
+type HabitListScreenNavigationProp = BottomTabNavigationProp<
+  MainTabParamList,
+  'Habits'
+>;
 
 interface HabitListScreenProps {
   navigation: HabitListScreenNavigationProp;
 }
 
-export const HabitListScreen: React.FC<HabitListScreenProps> = ({ navigation: _navigation }) => {
-  const { logout, user } = useAuth();
+export const HabitListScreen: React.FC<HabitListScreenProps> = ({
+  navigation: _navigation,
+}) => {
+  const {logout, user} = useAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -29,7 +34,7 @@ export const HabitListScreen: React.FC<HabitListScreenProps> = ({ navigation: _n
 
   return (
     <Container style={styles.container}>
-      <Header 
+      <Header
         title={`Hi, ${user?.name || 'User'}!`}
         rightComponent={renderLogoutButton()}
       />

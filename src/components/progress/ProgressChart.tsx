@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import {useHabits} from '../../context/HabitContext';
 import {getDatesInWeek, formatDate} from '../../utils/dateUtils';
 
@@ -101,54 +101,66 @@ export const ProgressChart: React.FC = () => {
   const {totalCompleted, totalPossible, weeklyAverage} = getTotalWeeklyStats();
 
   return (
-    <View style={styles.container}>
-      {/* Today's Progress Circle */}
-      <View style={styles.todayProgressContainer}>
-        <Text style={styles.sectionTitle}>Today's Progress</Text>
-        <View style={styles.circleContainer}>
-          <View style={styles.progressCircle}>
-            <View
-              style={[
-                styles.progressCircleInner,
-                {borderColor: getBorderColor(currentProgress)},
-              ]}>
-              <Text style={styles.progressPercentage}>{currentProgress}%</Text>
-              <Text style={styles.progressLabel}>Complete</Text>
+    <ImageBackground
+      source={require('../../assets/pexels-cottonbro-5083397.jpg')}
+      style={styles.background}
+      resizeMode="cover"
+      // eslint-disable-next-line react-native/no-inline-styles
+      imageStyle={{opacity: 0.8}}
+      blurRadius={5}>
+      <View style={styles.container}>
+        {/* Today's Progress Circle */}
+        <View style={styles.todayProgressContainer}>
+          <Text style={styles.sectionTitle}>Today's Progress</Text>
+          <View style={styles.circleContainer}>
+            <View style={styles.progressCircle}>
+              <View
+                style={[
+                  styles.progressCircleInner,
+                  {borderColor: getBorderColor(currentProgress)},
+                ]}>
+                <Text style={styles.progressPercentage}>
+                  {currentProgress}%
+                </Text>
+                <Text style={styles.progressLabel}>Complete</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/* Weekly Chart */}
+        <View style={styles.weeklyContainer}>
+          <Text style={styles.sectionTitle}>Weekly Overview</Text>
+          <View style={styles.chartContainer}>
+            {weeklyData.map((data, index) => renderProgressBar(data, index))}
+          </View>
+          {/* Weekly Summary */}
+          <View style={styles.summaryContainer}>
+            <View style={styles.summaryItem}>
+              <Text style={styles.summaryNumber}>{weeklyAverage}%</Text>
+              <Text style={styles.summaryLabel}>Weekly Average</Text>
+            </View>
+            <View style={styles.summaryItem}>
+              <Text style={styles.summaryNumber}>{totalCompleted}</Text>
+              <Text style={styles.summaryLabel}>Completed</Text>
+            </View>
+            <View style={styles.summaryItem}>
+              <Text style={styles.summaryNumber}>{totalPossible}</Text>
+              <Text style={styles.summaryLabel}>Total Possible</Text>
             </View>
           </View>
         </View>
       </View>
-
-      {/* Weekly Chart */}
-      <View style={styles.weeklyContainer}>
-        <Text style={styles.sectionTitle}>Weekly Overview</Text>
-        <View style={styles.chartContainer}>
-          {weeklyData.map((data, index) => renderProgressBar(data, index))}
-        </View>
-        {/* Weekly Summary */}
-        <View style={styles.summaryContainer}>
-          <View style={styles.summaryItem}>
-            <Text style={styles.summaryNumber}>{weeklyAverage}%</Text>
-            <Text style={styles.summaryLabel}>Weekly Average</Text>
-          </View>
-          <View style={styles.summaryItem}>
-            <Text style={styles.summaryNumber}>{totalCompleted}</Text>
-            <Text style={styles.summaryLabel}>Completed</Text>
-          </View>
-          <View style={styles.summaryItem}>
-            <Text style={styles.summaryNumber}>{totalPossible}</Text>
-            <Text style={styles.summaryLabel}>Total Possible</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F2F2F7',
   },
   sectionTitle: {
     fontSize: 20,

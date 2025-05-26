@@ -100,7 +100,7 @@ npx react-native run-ios
 
 GitHub Repo Link: https://github.com/Thushakaran/Habit-tracker
 
-Demo Video Link: https://drive.google.com/file/d/1GP7cwJKwYu3FnDckx2OyvujotO8gFjTa/view?usp=sharing
+Demo Video Link: https://drive.google.com/file/d/1-9pXhsdtUeqCjmkS4GokCvB3CKxYRwpx/view?usp=sharing
 
 
 
